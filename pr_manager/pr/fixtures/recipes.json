@@ -1,0 +1,18 @@
+[
+  {
+    "model": "pr.reteta",
+    "fields": {
+      "name": "Supa",
+      "created_at": "2022-12-12 11:00:00",
+      "updated_at": "2022-12-12 11:00:00"
+    }
+  },
+  {
+    "model": "pr.reteta",
+    "fields": {
+      "name": "Mamaliga",
+      "created_at": "2022-12-12 11:00:00",
+      "updated_at": "2022-12-12 11:00:00"
+    }
+  }
+]

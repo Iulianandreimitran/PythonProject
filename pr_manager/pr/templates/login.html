@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form id="loginForm" action="{% url 'loginview' %}" method="post">
+  {% csrf_token %}
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required><br>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required><br>
+
+  <input type="submit" value="Login">
+
+</form>
+<!--<script>-->
+<!--        document.getElementById("loginForm").addEventListener("submit", function(event) {-->
+<!--            event.preventDefault();-->
+<!--            var formData = new FormData(this);-->
+<!--            var jsonData = {};-->
+<!--            formData.forEach(function(value, key){-->
+<!--                jsonData[key] = value;-->
+<!--            });-->
+
+<!--            fetch('/api/login/', {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json',-->
+<!--                    'X-CSRFToken': getCookie('csrftoken')-->
+<!--                },-->
+<!--                body: JSON.stringify(jsonData)-->
+<!--            })-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                console.log(data);-->
+<!--                window.location.href = 'http://127.0.0.1:8000';-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--                console.error('Error:', error);-->
+<!--            });-->
+<!--        });-->
+
+<!--        function getCookie(name) {-->
+<!--            var cookieValue = null;-->
+<!--            if (document.cookie && document.cookie !== '') {-->
+<!--                var cookies = document.cookie.split(';');-->
+<!--                for (var i = 0; i < cookies.length; i++) {-->
+<!--                    var cookie = cookies[i].trim();-->
+<!--                    if (cookie.substring(0, name.length + 1) === (name + '=')) {-->
+<!--                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));-->
+<!--                        break;-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--            return cookieValue;-->
+<!--        }-->
+<!--    </script>-->
+{% endblock %}

@@ -1,0 +1,136 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #444444;
+    text-align: center;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .nav-item {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.navbar .nav-item:hover {
+    background-color: #555;
+}
+
+.nav-item-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Recipe List Styles */
+#recipes-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recipes-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.recipe:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.recipe h2 {
+    color: #333;
+    margin-top: 0;
+}
+
+.recipe p {
+    color: #666;
+    font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+    }
+
+    .navbar .nav-item,
+    .navbar .nav-item-right {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    #recipes-container {
+        width: 95%;
+    }
+}
+
+/* Button Styles */
+button, .button {
+    padding: 10px 20px;
+    background-color: #5C6BC0; /* Example button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover, .button:hover {
+    background-color: #3949AB; /* Darker shade for hover effect */
+}
+
+.logout-button {
+    background-color: #D32F2F; /* Red color for logout to distinguish it */
+    color: white;
+}
+
+.logout-button:hover {
+    background-color: #B71C1C; /* Darker red for hover effect */
+}
+
+/* Align the button to the right if it's in a navigation bar */
+.nav-item-right .button {
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Header and Footer Styles */
+header, footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer {
+    margin-top: 40px;
+}

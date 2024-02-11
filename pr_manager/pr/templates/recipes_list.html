@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>Recipes</h1>
+<div id="recipes-container">
+  <form id="create-recipe-form">
+    <input type="text" name="name" placeholder="Recipe Name" required />
+    <textarea name="ingredients" placeholder="Ingredients" required></textarea>
+    <textarea name="text" placeholder="Recipe Text" required></textarea>
+    <input type="number" name="timp" placeholder="Time" step="1" required />
+    <button type="submit">Add Recipe</button>
+  </form>
+  <form id="delete-recipe-form">
+    <input type="text" name="name" placeholder="Recipe Name" required />
+    <button type="submit">Delete Recipe</button>
+  </form>
+
+  <div class="recipes-list">
+     <ul id="recipelist"></ul>
+  </div>
+</div>
+<script>
+        document.getElementById("create-recipe-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            var jsonData = {};
+            formData.forEach(function(value, key){
+                jsonData[key] = value;
+            });
+
+            fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                fetchItems();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        document.getElementById("delete-recipe-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            var jsonData = {};
+            formData.forEach(function(value, key){
+                jsonData[key] = value;
+            });
+
+            fetch('/api', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                fetchItems();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        function fetchItems() {
+
+            fetch('/api', {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const itemList = document.getElementById('recipelist');
+                itemList.innerHTML = '';
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                    <h2>${item.name}</h2>
+                    <p><strong>Ingredients:</strong> ${item.ingredients}</p>
+                    <p><strong>Recipe Text:</strong> ${item.text}</p>
+                    <p><strong>Time:</strong> ${item.timp} min</p>
+                    <p><strong>Created At:</strong> ${new Date(item.created_at).toLocaleString()}</p>
+                    `;
+                    itemList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        fetchItems();
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+</script>
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/recipes_style.css' %}" />
+<script src="{% static 'js/recipe_action.js' %}"></script>
